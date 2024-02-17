@@ -1,11 +1,18 @@
 {
-  "type": "package",
-  "name": "mc706/prefab-ui",
-  "summary": "Prefab UI is a collection of ElmUI components inspired by clarity.design.",
-  "version": "0.0.0",
-  "exposed-modules": [],
-  "elm-version": "0.19.0 <= v < 0.20.0",
-  "dependencies": {
-
-  }
+    "type": "package",
+    "name": "mc706/prefab-ui",
+    "summary": "Prefab UI is a collection of ElmUI components inspired by clarity.design.",
+    "license": "BSD-3-Clause",
+    "version": "1.0.0",
+    "exposed-modules": [
+        "Prefab.Button",
+        "Theme"
+    ],
+    "elm-version": "0.19.1 <= v < 0.20.0",
+    "dependencies": {
+        "elm/core": "1.0.0 <= v < 2.0.0",
+        "lattyware/elm-fontawesome": "7.0.0 <= v < 8.0.0",
+        "mdgriffith/elm-ui": "1.1.8 <= v < 2.0.0"
+    },
+    "test-dependencies": {}
 }

@@ -7,3 +7,4 @@ repl-temp-*
 */index.html
 index.html
 .elm-static-html
+node_modules
