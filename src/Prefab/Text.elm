@@ -1,11 +1,11 @@
-module Prefab.Text exposing (body, fontFamily, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table)
+module Prefab.Text exposing (body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table)
 
 {-| A collection of text elements with predefined styles.
 
 
 # Text Helpers
 
-@docs body, fontFamily, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table
+@docs body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table
 
 -}
 
@@ -47,6 +47,8 @@ textInternal attrs extraAttrs key =
     el (baseTextAttrs ++ attrs ++ extraAttrs) <| text key
 
 
+{-| A large header text element.
+-}
 h1 : List (Attribute msg) -> String -> Element msg
 h1 =
     textInternal
@@ -56,6 +58,8 @@ h1 =
         ]
 
 
+{-| A medium header text element.
+-}
 h2 : List (Attribute msg) -> String -> Element msg
 h2 =
     textInternal
@@ -65,6 +69,8 @@ h2 =
         ]
 
 
+{-| A small header text element.
+-}
 h3 : List (Attribute msg) -> String -> Element msg
 h3 =
     textInternal
@@ -74,6 +80,8 @@ h3 =
         ]
 
 
+{-| A very small header text element.
+-}
 h4 : List (Attribute msg) -> String -> Element msg
 h4 =
     textInternal
@@ -83,6 +91,8 @@ h4 =
         ]
 
 
+{-| A very very small header text element.
+-}
 h5 : List (Attribute msg) -> String -> Element msg
 h5 =
     textInternal
@@ -92,6 +102,8 @@ h5 =
         ]
 
 
+{-| A very very very small header text element.
+-}
 h6 : List (Attribute msg) -> String -> Element msg
 h6 =
     textInternal
@@ -101,6 +113,8 @@ h6 =
         ]
 
 
+{-| A body text element.
+-}
 body : List (Attribute msg) -> String -> Element msg
 body =
     textInternal
@@ -110,6 +124,8 @@ body =
         ]
 
 
+{-| A section header text element.
+-}
 sectionHeader : List (Attribute msg) -> String -> Element msg
 sectionHeader =
     textInternal
@@ -119,6 +135,8 @@ sectionHeader =
         ]
 
 
+{-| A table text element.
+-}
 table : List (Attribute msg) -> String -> Element msg
 table =
     textInternal
@@ -128,14 +146,22 @@ table =
         ]
 
 
+{-| A grid text element.
+-}
+grid : List (Attribute msg) -> String -> Element msg
 grid =
     table
 
 
+{-| A form text element.
+-}
+form : List (Attribute msg) -> String -> Element msg
 form =
     table
 
 
+{-| A form text element.
+-}
 label : List (Attribute msg) -> String -> Element msg
 label =
     textInternal
@@ -146,6 +172,8 @@ label =
         ]
 
 
+{-| A small header text element.
+-}
 headerSmall : List (Attribute msg) -> String -> Element msg
 headerSmall =
     textInternal
@@ -156,6 +184,8 @@ headerSmall =
         ]
 
 
+{-| A help text element.
+-}
 helpText : List (Attribute msg) -> String -> Element msg
 helpText =
     textInternal

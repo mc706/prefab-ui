@@ -2,7 +2,6 @@ module Prefab.Link exposing
     ( new, view
     , withIconLeft, withIconRight, withSize, withStyle, withVariant
     , Size, Style, Variant
-    , Link
     )
 
 {-| A link styled as a button.
