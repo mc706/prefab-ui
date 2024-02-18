@@ -6,11 +6,20 @@
     "version": "1.0.0",
     "exposed-modules": [
         "Prefab.Button",
+        "Prefab.Card",
+        "Prefab.Icon",
+        "Prefab.Input",
+        "Prefab.Link",
+        "Prefab.Loader",
+        "Prefab.Radio",
+        "Prefab.Text",
         "Theme"
     ],
     "elm-version": "0.19.1 <= v < 0.20.0",
     "dependencies": {
         "elm/core": "1.0.0 <= v < 2.0.0",
+        "elm/html": "1.0.0 <= v < 2.0.0",
+        "elm/json": "1.0.0 <= v < 2.0.0",
         "lattyware/elm-fontawesome": "7.0.0 <= v < 8.0.0",
         "mdgriffith/elm-ui": "1.1.8 <= v < 2.0.0"
     },
