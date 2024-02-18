@@ -1,7 +1,7 @@
 module Prefab.Radio exposing
     ( new, view
     , withArrangement, withOptions, withSerializer
-    , Arrangement
+    , Arrangement(..)
     )
 
 {-| A radio button group.

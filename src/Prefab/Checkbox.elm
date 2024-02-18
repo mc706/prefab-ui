@@ -1,4 +1,4 @@
-module Prefab.Checkbox exposing (..)
+module Prefab.Checkbox exposing (view)
 
 {-| A checkbox with a label to the right of the checkbox.
 
