@@ -1,4 +1,4 @@
-module Prefab.Loader exposing (..)
+module Prefab.Loader exposing (view)
 
 {-| A loader component.
 

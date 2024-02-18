@@ -1,4 +1,33 @@
-module Prefab.Link exposing (Link, Size, Style, Variant, new, view, withIconLeft, withIconRight, withSize, withStyle, withVariant)
+module Prefab.Link exposing
+    ( new, view
+    , withIconLeft, withIconRight, withSize, withStyle, withVariant
+    , Size, Style, Variant
+    , Link
+    )
+
+{-| A link styled as a button.
+
+
+# Link
+
+Styles like buttons
+
+
+# Creating
+
+@docs new, view
+
+
+# Modifying
+
+@docs withIconLeft, withIconRight, withSize, withStyle, withVariant
+
+
+# Types
+
+@docs Size, Style, Variant
+
+-}
 
 import Element exposing (Attribute, Color, Element, centerX, centerY, el, height, link, mouseOver, paddingXY, px, row, text)
 import Element.Background as Background
@@ -20,12 +49,16 @@ type Link msg
         }
 
 
+{-| The style of the button
+-}
 type Variant
     = Solid
     | Outline
     | Flat
 
 
+{-| The style of the button
+-}
 type Style
     = Primary
     | Secondary
@@ -35,6 +68,8 @@ type Style
     | Info
 
 
+{-| The size of the button
+-}
 type Size
     = Normal
     | Small
@@ -63,6 +98,8 @@ styleToColor style =
             Theme.info
 
 
+{-| Create a new link styled as a button
+-}
 new : { label : String, path : String } -> Link msg
 new { label, path } =
     Settings
@@ -135,6 +172,8 @@ attrsFromSettings (Settings settings) =
     sizeAttrs ++ variantAttrs
 
 
+{-| Modify the style of the button
+-}
 withStyle : Style -> Link msg -> Link msg
 withStyle style (Settings settings) =
     Settings
@@ -143,6 +182,8 @@ withStyle style (Settings settings) =
         }
 
 
+{-| Modify the size of the button
+-}
 withSize : Size -> Link msg -> Link msg
 withSize size (Settings settings) =
     Settings
@@ -151,6 +192,8 @@ withSize size (Settings settings) =
         }
 
 
+{-| Modify the variant of the button
+-}
 withVariant : Variant -> Link msg -> Link msg
 withVariant variant (Settings settings) =
     Settings
@@ -159,6 +202,8 @@ withVariant variant (Settings settings) =
         }
 
 
+{-| Add an icon to the left of the button
+-}
 withIconLeft : Icon msg -> Link msg -> Link msg
 withIconLeft icon (Settings settings) =
     Settings
@@ -167,6 +212,8 @@ withIconLeft icon (Settings settings) =
         }
 
 
+{-| Add an icon to the right of the button
+-}
 withIconRight : Icon msg -> Link msg -> Link msg
 withIconRight icon (Settings settings) =
     Settings
@@ -175,6 +222,8 @@ withIconRight icon (Settings settings) =
         }
 
 
+{-| View the link styled as a button
+-}
 view : List (Attribute msg) -> Link msg -> Element msg
 view extraAttrs ((Settings settings) as btnSettings) =
     link (baseAttrs ++ attrsFromSettings btnSettings ++ extraAttrs)
