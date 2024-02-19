@@ -119,7 +119,7 @@ view attrs ((Settings settings) as radioSettings) =
                     [ Input.radio
                         []
                         { onChange = settings.onChange
-                        , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                        , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                         , selected = settings.selected
                         , label = Input.labelHidden settings.label
                         }
@@ -134,7 +134,7 @@ view attrs ((Settings settings) as radioSettings) =
                     [ Input.radioRow
                         []
                         { onChange = settings.onChange
-                        , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                        , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                         , selected = settings.selected
                         , label = Input.labelHidden settings.label
                         }
@@ -148,7 +148,7 @@ view attrs ((Settings settings) as radioSettings) =
                 , Input.radio
                     []
                     { onChange = settings.onChange
-                    , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                    , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                     , selected = settings.selected
                     , label = Input.labelHidden settings.label
                     }
@@ -161,7 +161,7 @@ view attrs ((Settings settings) as radioSettings) =
                 , Input.radioRow
                     []
                     { onChange = settings.onChange
-                    , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                    , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                     , selected = settings.selected
                     , label = Input.labelHidden settings.label
                     }
@@ -174,7 +174,7 @@ view attrs ((Settings settings) as radioSettings) =
                 , Input.radioRow
                     []
                     { onChange = settings.onChange
-                    , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                    , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                     , selected = settings.selected
                     , label = Input.labelHidden settings.label
                     }
