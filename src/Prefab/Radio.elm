@@ -132,7 +132,7 @@ view attrs ((Settings settings) as radioSettings) =
                 [ Text.label [ width <| px 70 ] settings.label
                 , column [ spacing 4 ]
                     [ Input.radioRow
-                        []
+                        [ spacing 12 ]
                         { onChange = settings.onChange
                         , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                         , selected = settings.selected
@@ -159,7 +159,7 @@ view attrs ((Settings settings) as radioSettings) =
             column (baseAttributes ++ attrs)
                 [ Text.label [] settings.label
                 , Input.radioRow
-                    []
+                    [ spacing 12 ]
                     { onChange = settings.onChange
                     , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                     , selected = settings.selected
@@ -172,7 +172,7 @@ view attrs ((Settings settings) as radioSettings) =
             row (baseAttributes ++ attrs)
                 [ Text.label [ width <| px 70 ] settings.label
                 , Input.radioRow
-                    []
+                    [ spacing 12 ]
                     { onChange = settings.onChange
                     , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
                     , selected = settings.selected
