@@ -1,7 +1,7 @@
 module Prefab.Radio exposing
     ( new, view
-    , withArrangement, withOptions, withSerializer
-    , Arrangement(..)
+    , withLayout, withOptions, withSerializer, withMessage, withDisabled
+    , Layout(..)
     )
 
 {-| A radio button group.
@@ -14,39 +14,45 @@ module Prefab.Radio exposing
 
 # Modifying
 
-@docs withArrangement, withOptions, withSerializer
+@docs withLayout, withOptions, withSerializer, withMessage, withDisabled
 
 
 # Types
 
-@docs Arrangement
+@docs Layout
 
 -}
 
-import Element exposing (Attribute, Element, el, text)
+import Element exposing (Attribute, Element, column, el, none, px, row, spacing, text, width)
 import Element.Input as Input
+import Prefab.Text as Text
 
 
 baseAttributes : List (Attribute msg)
 baseAttributes =
-    []
+    [ spacing 4 ]
 
 
 {-| The arrangement of the radio buttons.
 -}
-type Arrangement
-    = Horizontal
-    | Vertical
+type Layout
+    = Vertical
+    | VerticalInline
+    | Horizontal
+    | HorizontalInline
+    | Compact
 
 
 type Radio a msg
     = Settings
         { label : String
         , onChange : a -> msg
-        , arrangement : Arrangement
+        , layout : Layout
         , options : List a
         , serializer : a -> String
         , selected : Maybe a
+        , message : Maybe String
+        , disabled : Bool
         }
 
 
@@ -57,18 +63,20 @@ new settings =
     Settings
         { label = settings.label
         , onChange = settings.onChange
-        , arrangement = Horizontal
+        , layout = Vertical
         , options = []
         , serializer = \_ -> ""
         , selected = settings.selected
+        , message = Nothing
+        , disabled = False
         }
 
 
 {-| Change the arrangement of the radio buttons.
 -}
-withArrangement : Arrangement -> Radio a msg -> Radio a msg
-withArrangement arrangement (Settings settings) =
-    Settings { settings | arrangement = arrangement }
+withLayout : Layout -> Radio a msg -> Radio a msg
+withLayout layout (Settings settings) =
+    Settings { settings | layout = layout }
 
 
 {-| Change the options of the radio buttons.
@@ -85,25 +93,90 @@ withSerializer serializer (Settings settings) =
     Settings { settings | serializer = serializer }
 
 
+{-| Add a help message of the radio buttons.
+-}
+withMessage : String -> Radio a msg -> Radio a msg
+withMessage message (Settings settings) =
+    Settings { settings | message = Just message }
+
+
+{-| Disable the radio buttons.
+-}
+withDisabled : Bool -> Radio a msg -> Radio a msg
+withDisabled disabled (Settings settings) =
+    Settings { settings | disabled = disabled }
+
+
 {-| View the radio button group.
 -}
 view : List (Attribute msg) -> Radio a msg -> Element msg
 view attrs ((Settings settings) as radioSettings) =
-    case settings.arrangement of
+    case settings.layout of
         Horizontal ->
-            Input.radio
-                (baseAttributes ++ attrs)
-                { onChange = settings.onChange
-                , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
-                , selected = settings.selected
-                , label = Input.labelRight [] <| el [] <| text settings.label
-                }
+            row baseAttributes
+                [ Text.label [ width <| px 70 ] settings.label
+                , column [ spacing 4 ]
+                    [ Input.radio
+                        []
+                        { onChange = settings.onChange
+                        , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                        , selected = settings.selected
+                        , label = Input.labelHidden settings.label
+                        }
+                    , settings.message |> Maybe.map (\msg -> Text.helpText [] msg) |> Maybe.withDefault none
+                    ]
+                ]
+
+        HorizontalInline ->
+            row (baseAttributes ++ attrs)
+                [ Text.label [ width <| px 70 ] settings.label
+                , column [ spacing 4 ]
+                    [ Input.radioRow
+                        []
+                        { onChange = settings.onChange
+                        , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                        , selected = settings.selected
+                        , label = Input.labelHidden settings.label
+                        }
+                    , settings.message |> Maybe.map (\msg -> Text.helpText [] msg) |> Maybe.withDefault none
+                    ]
+                ]
 
         Vertical ->
-            Input.radioRow
-                (baseAttributes ++ attrs)
-                { onChange = settings.onChange
-                , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
-                , selected = settings.selected
-                , label = Input.labelRight [] <| el [] <| text settings.label
-                }
+            column (baseAttributes ++ attrs)
+                [ Text.label [] settings.label
+                , Input.radio
+                    []
+                    { onChange = settings.onChange
+                    , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                    , selected = settings.selected
+                    , label = Input.labelHidden settings.label
+                    }
+                , settings.message |> Maybe.map (\msg -> Text.helpText [] msg) |> Maybe.withDefault none
+                ]
+
+        VerticalInline ->
+            column (baseAttributes ++ attrs)
+                [ Text.label [] settings.label
+                , Input.radioRow
+                    []
+                    { onChange = settings.onChange
+                    , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                    , selected = settings.selected
+                    , label = Input.labelHidden settings.label
+                    }
+                , settings.message |> Maybe.map (\msg -> Text.helpText [] msg) |> Maybe.withDefault none
+                ]
+
+        Compact ->
+            row (baseAttributes ++ attrs)
+                [ Text.label [ width <| px 70 ] settings.label
+                , Input.radioRow
+                    []
+                    { onChange = settings.onChange
+                    , options = settings.options |> List.map (\option -> Input.option option (el [] <| text <| settings.serializer option))
+                    , selected = settings.selected
+                    , label = Input.labelHidden settings.label
+                    }
+                , settings.message |> Maybe.map (\msg -> Text.helpText [] msg) |> Maybe.withDefault none
+                ]

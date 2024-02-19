@@ -1,4 +1,7 @@
-module Prefab.Text exposing (body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table)
+module Prefab.Text exposing
+    ( body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table
+    , fontFamily
+    )
 
 {-| A collection of text elements with predefined styles.
 
