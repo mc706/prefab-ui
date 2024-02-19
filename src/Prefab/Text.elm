@@ -1,14 +1,11 @@
-module Prefab.Text exposing
-    ( body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table
-    , fontFamily
-    )
+module Prefab.Text exposing (body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table, fontFamily)
 
 {-| A collection of text elements with predefined styles.
 
 
 # Text Helpers
 
-@docs body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table
+@docs body, form, grid, h1, h2, h3, h4, h5, h6, headerSmall, helpText, label, sectionHeader, table, fontFamily
 
 -}
 
@@ -17,6 +14,8 @@ import Element.Font as Font
 import Theme
 
 
+{-| A default font family.
+-}
 fontFamily : Attribute msg
 fontFamily =
     Font.family
