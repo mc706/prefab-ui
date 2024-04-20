@@ -23,9 +23,11 @@ module Prefab.Radio exposing
 
 -}
 
-import Element exposing (Attribute, Element, column, el, none, px, row, spacing, text, width)
-import Element.Input as Input
+import Element exposing (Attribute, Element, centerY, column, el, height, none, px, row, spacing, text, width)
+import Element.Border as Border
+import Element.Input as Input exposing (Option, OptionState(..))
 import Prefab.Text as Text
+import Theme
 
 
 baseAttributes : List (Attribute msg)
@@ -107,19 +109,41 @@ withDisabled disabled (Settings settings) =
     Settings { settings | disabled = disabled }
 
 
+makeOption : (a -> String) -> a -> Option a msg
+makeOption serializer value =
+    let
+        renderDot : OptionState -> Element msg
+        renderDot state =
+            case state of
+                Idle ->
+                    el [ Border.width 1, Border.rounded 14, height <| px 14, width <| px 14, Border.color Theme.gray7, centerY ] none
+
+                Focused ->
+                    el [] none
+
+                Selected ->
+                    el [] none
+
+        render : OptionState -> Element msg
+        render state =
+            row [ spacing 12 ] [ renderDot state, Text.form [ centerY ] <| serializer value ]
+    in
+    Input.optionWith value render
+
+
 {-| View the radio button group.
 -}
 view : List (Attribute msg) -> Radio a msg -> Element msg
 view attrs ((Settings settings) as radioSettings) =
     case settings.layout of
         Horizontal ->
-            row baseAttributes
+            row (baseAttributes ++ attrs)
                 [ Text.label [ width <| px 70 ] settings.label
                 , column [ spacing 4 ]
                     [ Input.radio
                         []
                         { onChange = settings.onChange
-                        , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
+                        , options = settings.options |> List.map (makeOption settings.serializer)
                         , selected = settings.selected
                         , label = Input.labelHidden settings.label
                         }
@@ -134,7 +158,7 @@ view attrs ((Settings settings) as radioSettings) =
                     [ Input.radioRow
                         [ spacing 12 ]
                         { onChange = settings.onChange
-                        , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
+                        , options = settings.options |> List.map (makeOption settings.serializer)
                         , selected = settings.selected
                         , label = Input.labelHidden settings.label
                         }
@@ -148,7 +172,7 @@ view attrs ((Settings settings) as radioSettings) =
                 , Input.radio
                     []
                     { onChange = settings.onChange
-                    , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
+                    , options = settings.options |> List.map (makeOption settings.serializer)
                     , selected = settings.selected
                     , label = Input.labelHidden settings.label
                     }
@@ -161,7 +185,7 @@ view attrs ((Settings settings) as radioSettings) =
                 , Input.radioRow
                     [ spacing 12 ]
                     { onChange = settings.onChange
-                    , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
+                    , options = settings.options |> List.map (makeOption settings.serializer)
                     , selected = settings.selected
                     , label = Input.labelHidden settings.label
                     }
@@ -174,7 +198,7 @@ view attrs ((Settings settings) as radioSettings) =
                 , Input.radioRow
                     [ spacing 12 ]
                     { onChange = settings.onChange
-                    , options = settings.options |> List.map (\option -> Input.option option (Text.form [] <| settings.serializer option))
+                    , options = settings.options |> List.map (makeOption settings.serializer)
                     , selected = settings.selected
                     , label = Input.labelHidden settings.label
                     }

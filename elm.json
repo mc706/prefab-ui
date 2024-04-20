@@ -7,6 +7,7 @@
     "exposed-modules": [
         "Prefab.Button",
         "Prefab.Card",
+        "Prefab.Checkbox",
         "Prefab.Icon",
         "Prefab.Input",
         "Prefab.Link",
