@@ -161,7 +161,7 @@ makeClarityOption serializer value =
 
                 Selected ->
                     el
-                        [ Border.width 7
+                        [ Border.width 5
                         , Border.rounded 14
                         , height <| px 14
                         , width <| px 14
