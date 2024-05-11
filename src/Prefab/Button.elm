@@ -2,6 +2,7 @@ module Prefab.Button exposing
     ( Size(..), Style(..), Variant(..)
     , new, view
     , withDisable, withIconLeft, withIconRight, withSize, withStyle, withVariant
+    , withLabelHidden, withoutCaps
     )
 
 {-| Button Module
@@ -25,12 +26,13 @@ Closely modeled after the Clarity Design System's button component. <https://cla
 
 -}
 
-import Element exposing (Attribute, Color, Element, centerX, centerY, el, fill, height, mouseOver, paddingXY, px, row, text, width)
+import Element exposing (Attribute, Color, Element, centerX, centerY, el, fill, height, mouseOver, paddingXY, px, row, spacing, text, width)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import FontAwesome exposing (Icon, WithoutId)
+import Prefab.Icon as Icon
 import Theme exposing (addAlpha)
 
 
@@ -45,6 +47,7 @@ type Button msg
         , iconRight : Maybe (Icon WithoutId)
         , canDisable : Bool
         , allCaps : Bool
+        , labelHidden : Bool
         }
 
 
@@ -112,6 +115,7 @@ new settings =
         , iconRight = Nothing
         , canDisable = False
         , allCaps = True
+        , labelHidden = False
         }
 
 
@@ -239,6 +243,16 @@ withoutCaps (Settings settings) =
         }
 
 
+{-| Hide the label of the button
+-}
+withLabelHidden : Button msg -> Button msg
+withLabelHidden (Settings settings) =
+    Settings
+        { settings
+            | labelHidden = True
+        }
+
+
 baseAttrs : List (Attribute msg)
 baseAttrs =
     [ Border.rounded 3
@@ -281,11 +295,33 @@ view extraAttrs ((Settings settings) as btnSettings) =
                     el [ centerX, centerY ] labelText
 
                 ( Just icon, Nothing ) ->
-                    row [] [ el [ centerX, centerY ] labelText ]
+                    row [ spacing 8 ]
+                        [ Icon.icon [] icon
+                        , if settings.labelHidden then
+                            Element.none
+
+                          else
+                            el [ centerX, centerY ] labelText
+                        ]
 
                 ( Nothing, Just icon ) ->
-                    row [] [ el [ centerX, centerY ] labelText ]
+                    row [ spacing 8 ]
+                        [ if settings.labelHidden then
+                            Element.none
+
+                          else
+                            el [ centerX, centerY ] labelText
+                        , Icon.icon [] icon
+                        ]
 
                 ( Just iconLeft, Just iconRight ) ->
-                    row [] [ el [ centerX, centerY ] labelText ]
+                    row [ spacing 8 ]
+                        [ Icon.icon [] iconLeft
+                        , if settings.labelHidden then
+                            Element.none
+
+                          else
+                            el [ centerX, centerY ] labelText
+                        , Icon.icon [] iconRight
+                        ]
         }
