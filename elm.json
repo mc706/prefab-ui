@@ -3,7 +3,7 @@
     "name": "mc706/prefab-ui",
     "summary": "Prefab UI is a collection of ElmUI components inspired by clarity.design.",
     "license": "BSD-3-Clause",
-    "version": "3.1.0",
+    "version": "4.0.0",
     "exposed-modules": [
         "Prefab.Button",
         "Prefab.Card",
