@@ -1,8 +1,7 @@
 module Prefab.Radio exposing
     ( new, view
-    , withLayout, withOptions, withSerializer, withMessage, withDisabled
+    , withLayout, withOptions, withSerializer, withMessage, withDisabled, withDefaultButton, withCustomButton
     , Layout(..)
-    , withCustomButton, withDefaultButton
     )
 
 {-| A radio button group.
@@ -15,7 +14,7 @@ module Prefab.Radio exposing
 
 # Modifying
 
-@docs withLayout, withOptions, withSerializer, withMessage, withDisabled
+@docs withLayout, withOptions, withSerializer, withMessage, withDisabled, withDefaultButton, withCustomButton
 
 
 # Types

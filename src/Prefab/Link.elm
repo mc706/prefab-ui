@@ -1,8 +1,7 @@
 module Prefab.Link exposing
     ( new, view
-    , withIconLeft, withIconRight, withSize, withStyle, withVariant
+    , withIconLeft, withIconRight, withSize, withStyle, withVariant, withoutCaps, withLabelHidden
     , Size(..), Style(..), Variant(..)
-    , withLabelHidden, withoutCaps
     )
 
 {-| A link styled as a button.
@@ -20,7 +19,7 @@ Styles like buttons
 
 # Modifying
 
-@docs withIconLeft, withIconRight, withSize, withStyle, withVariant
+@docs withIconLeft, withIconRight, withSize, withStyle, withVariant, withoutCaps, withLabelHidden
 
 
 # Types
@@ -227,6 +226,8 @@ withIconRight icon (Settings settings) =
         }
 
 
+{-| Remove all caps from the link
+-}
 withoutCaps : Link msg -> Link msg
 withoutCaps (Settings settings) =
     Settings
@@ -235,6 +236,8 @@ withoutCaps (Settings settings) =
         }
 
 
+{-| Hide the label of the link
+-}
 withLabelHidden : Link msg -> Link msg
 withLabelHidden (Settings settings) =
     Settings

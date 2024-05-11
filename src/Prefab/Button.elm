@@ -1,8 +1,7 @@
 module Prefab.Button exposing
     ( Size(..), Style(..), Variant(..)
     , new, view
-    , withDisable, withIconLeft, withIconRight, withSize, withStyle, withVariant
-    , withLabelHidden, withoutCaps
+    , withDisable, withIconLeft, withIconRight, withSize, withStyle, withVariant, withLabelHidden, withoutCaps
     )
 
 {-| Button Module
@@ -22,7 +21,7 @@ Closely modeled after the Clarity Design System's button component. <https://cla
 
 # Adding Options
 
-@docs withDisable, withIconLeft, withIconRight, withSize, withStyle, withVariant
+@docs withDisable, withIconLeft, withIconRight, withSize, withStyle, withVariant, withLabelHidden, withoutCaps
 
 -}
 
