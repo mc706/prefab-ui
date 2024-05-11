@@ -30,7 +30,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import FontAwesome exposing (Icon)
+import FontAwesome exposing (Icon, WithoutId)
 import Theme exposing (addAlpha)
 
 
@@ -41,8 +41,8 @@ type Button msg
         , style : Style
         , size : Size
         , variant : Variant
-        , iconLeft : Maybe (Icon msg)
-        , iconRight : Maybe (Icon msg)
+        , iconLeft : Maybe (Icon WithoutId)
+        , iconRight : Maybe (Icon WithoutId)
         , canDisable : Bool
         , allCaps : Bool
         }
@@ -201,7 +201,7 @@ withVariant variant (Settings settings) =
 
 {-| Add an icon to the left of the button
 -}
-withIconLeft : Icon msg -> Button msg -> Button msg
+withIconLeft : Icon WithoutId -> Button msg -> Button msg
 withIconLeft icon (Settings settings) =
     Settings
         { settings
@@ -211,7 +211,7 @@ withIconLeft icon (Settings settings) =
 
 {-| Add an icon to the right of the button
 -}
-withIconRight : Icon msg -> Button msg -> Button msg
+withIconRight : Icon WithoutId -> Button msg -> Button msg
 withIconRight icon (Settings settings) =
     Settings
         { settings
