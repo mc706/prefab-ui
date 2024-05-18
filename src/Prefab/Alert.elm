@@ -62,6 +62,8 @@ type Alert msg
         }
 
 
+{-| Create a new alert with the given message and default settings
+-}
 new : { message : String } -> Alert msg
 new { message } =
     Settings
@@ -73,18 +75,24 @@ new { message } =
         }
 
 
+{-| Set the type of alert
+-}
 withType : AlertType -> Alert msg -> Alert msg
 withType alertType (Settings settings) =
     Settings
         { settings | alertType = alertType }
 
 
+{-| Set the size of the alert
+-}
 withSize : AlertSize -> Alert msg -> Alert msg
 withSize size (Settings settings) =
     Settings
         { settings | size = size }
 
 
+{-| Set a dismiss button with the given message
+-}
 withDismiss : msg -> Alert msg -> Alert msg
 withDismiss onClose (Settings settings) =
     Settings
@@ -135,6 +143,8 @@ attrsFromSettings (Settings settings) =
     typeAttrs ++ sizeAttrs
 
 
+{-| Display the alert
+-}
 view : List (Attribute msg) -> Alert msg -> Element msg
 view attrs ((Settings settings) as alertSettings) =
     row (baseAttrs ++ attrsFromSettings alertSettings ++ attrs)
